@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const categoriasRouter = require('./routes/categorias.routes')
 const posionesRouter = require('./routes/posiones.routes');
+const ingredientesRouter = require('./routes/ingrediente.routes');
 
 const config = {
   application: {
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/posiones', posionesRouter);
 app.use('/categorias', categoriasRouter);
+app.use('/ingredientes', ingredientesRouter);
 
 // Middleware para manejar rutas no encontradas y devolver error 404
 app.use((req, res, next) => {
