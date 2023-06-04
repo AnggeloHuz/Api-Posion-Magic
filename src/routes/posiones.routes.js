@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { ListarPosiones, AgregarPosion, EditarPosion, EliminarPosion } = require('../controller/posiones')
+const { ListarPosiones, ListarPosionesCategorias, AgregarPosion, EditarPosion, EliminarPosion } = require('../controller/posiones')
 
 // Listar todos los Posiones de la tienda
 router.get('/', ListarPosiones)
+
+// Listar todos los Posiones de la tienda por Categorias
+router.get('/:categoria', ListarPosionesCategorias)
 
 // Agregar Posiones a la Tienda
 router.post('/add', AgregarPosion)

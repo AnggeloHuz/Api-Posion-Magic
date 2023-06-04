@@ -11,6 +11,19 @@ async function ListarPosiones(req, res) {
     }
 }
 
+async function ListarPosionesCategorias(req, res) {
+    try {
+        const { categoria } = req.params
+        console.log(categoria)
+
+        const consulta = await pool.query('SELECT * FROM posiones WHERE categoria = ?', [categoria]);
+        res.status(200).json({ status: 200, data: consulta, menssage: 'Se ha listado con éxito todas las posiones'})
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: 500, menssage: 'Ocurrio un error dentro del servidor'});
+    }
+}
+
 //Completada
 async function AgregarPosion(req, res) {
     try {
@@ -70,6 +83,7 @@ async function EliminarPosion(req, res) {
 }
 
 module.exports = {
+    ListarPosionesCategorias,
     ListarPosiones,
     AgregarPosion,
     EditarPosion,
