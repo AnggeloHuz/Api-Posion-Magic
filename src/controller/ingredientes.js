@@ -20,8 +20,8 @@ async function AgregarIngrediente(req, res) {
             return res.status(400).json({ status: 400, menssage: 'No has ingresado propiedades necesarias: nombre, cantidad y descripcion'})
         }
 
-        await pool.query('INSERT INTO ingredientes SET ?', [body]);
-        res.status(200).json({ status: 200, menssage: 'Se ha agregado con éxito el ingrediente'})
+        const consulta = await pool.query('INSERT INTO ingredientes SET ?', [body]);
+        res.status(200).json({ status: 200,  data: consulta, menssage: 'Se ha agregado con éxito el ingrediente'})
     } catch(error) {
         console.error(error);
         res.status(500).json({ status: 500, menssage: 'Ocurrio un error dentro del servidor'});

@@ -33,9 +33,9 @@ async function AgregarPosion(req, res) {
             return res.status(400).json({ status: 400, menssage: 'No has ingresado propiedades necesarias: nombre, cantidad, categoria, descripcion, imagen y precio'})
         }
 
-        await pool.query('INSERT INTO posiones SET ?', [body]);
-        res.status(200).json({ status: 200, menssage: 'Se ha agregado con éxito la posion'})
-    } catch(error) {
+        const consulta = await pool.query('INSERT INTO posiones SET ?', [body]);
+        res.status(200).json({ status: 200, data: consulta, menssage: 'Se ha agregado con éxito la posion'})
+    } catch(error) { 
         console.error(error);
         res.status(500).json({ status: 500, menssage: 'Ocurrio un error dentro del servidor'});
     }
@@ -48,7 +48,7 @@ async function EditarPosion(req, res) {
         const { body } = req
 
         if (!body.nombre || !body.categoria || !body.cantidad || !body.descripcion || !body.precio || !body.imagen) {
-            return res.status(400).json({ status: 400, menssage: 'No has ingresado propiedades necesarias: nombre, cantidad, categoria, descripcion, imagen y precio'})
+            return res.status(400).json({ status: 400, data: consulta, menssage: 'No has ingresado propiedades necesarias: nombre, cantidad, categoria, descripcion, imagen y precio'})
         }
 
         const consulta = pool.query('SELECT * FROM posiones WHERE id = ?', [id])
